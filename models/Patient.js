@@ -5,6 +5,7 @@ const patientSchema = new mongoose.Schema({
   age: Number,
   gender: String,
   contact: String,
+  email: { type: String, unique: true, sparse: true }, // unique but allows multiple nulls
   doctorId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -13,3 +14,4 @@ const patientSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Patient', patientSchema);
+
