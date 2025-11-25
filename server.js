@@ -23,6 +23,10 @@ app.use('/api/questionnaires', questionnaireRoutes);
 app.use('/api/patient', patientRoutes);
 app.use("/api/patient-responses", require("./routes/patientResponseRoutes"));
 app.use("/api/sessions", sessionRoutes);
+app.use("/api/prescriptions", require("./routes/prescriptionRoutes"));
+app.use("/api/reviews", require("./routes/reviewRoutes"));
+app.use("/api/complaints", require("./routes/complaintRoutes"));
+
 
 
 // Server
