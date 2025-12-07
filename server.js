@@ -1,8 +1,9 @@
 const express = require('express');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./db');
 
-const userRoutes = require('./routes/userRoutes'); 
+const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const doctorRoutes = require('./routes/doctorRoutes');
 const questionnaireRoutes = require('./routes/questionnaireRoutes'); // <-- IMPORTANT
@@ -13,13 +14,21 @@ dotenv.config();
 connectDB(); // Connect to MongoDB
 
 const app = express();
+app.use(cors());
 app.use(express.json());
+
+// Request logging middleware
+app.use((req, res, next) => {
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] ${req.method} ${req.url}`);
+    next();
+});
 
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/doctor', doctorRoutes);
-app.use('/api/questionnaires', questionnaireRoutes); 
+app.use('/api/questionnaires', questionnaireRoutes);
 app.use('/api/patient', patientRoutes);
 app.use("/api/patient-responses", require("./routes/patientResponseRoutes"));
 app.use("/api/sessions", sessionRoutes);

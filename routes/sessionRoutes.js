@@ -7,7 +7,7 @@ const {
   updateSession
 } = require("../controllers/sessionController");
 
-const authMiddleware  = require("../middlewares/authMiddleware");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 // Book a session
 router.post("/", authMiddleware, createSession);

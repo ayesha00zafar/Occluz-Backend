@@ -10,4 +10,3 @@ router.post('/login', authUser);
 router.put('/change-password', changePassword);
 
 module.exports = router;
-

@@ -8,10 +8,10 @@ const {
 } = require("../controllers/patientResponseController");
 
 
-const authMiddleware  = require("../middlewares/authMiddleware");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 // PATIENT submits questionnaire response
-router.post("/", authMiddleware , submitResponse);
+router.post("/", authMiddleware, submitResponse);
 
 // Get a single response
 router.get("/view/:id", authMiddleware, getSingleResponse);
