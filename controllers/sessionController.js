@@ -3,8 +3,16 @@ const Session = require("../models/Session");
 // Create a new session
 exports.createSession = async (req, res) => {
   try {
-    const { doctorId, patientId, date, time, notes } = req.body;
-    const session = await Session.create({ doctorId, patientId, date, time, notes });
+    const { doctorId, patientId, date, time, notes, agenda, status } = req.body;
+    const session = await Session.create({ 
+      doctorId, 
+      patientId, 
+      date, 
+      time, 
+      notes, 
+      agenda,
+      status: status || 'scheduled'
+    });
     res.status(201).json({ success: true, session });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

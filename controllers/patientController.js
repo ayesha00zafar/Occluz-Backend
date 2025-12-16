@@ -1,6 +1,18 @@
 const PatientResponse = require('../models/PatientResponse');
 const TreatmentPlan = require('../models/TreatmentPlan');
 const Questionnaire = require('../models/Questionnaire');
+const Patient = require('../models/Patient');
+
+// Get patient profile by userId
+exports.getMyProfile = async (req, res) => {
+  try {
+    const patient = await Patient.findOne({ userId: req.user.id }).populate('doctorId', 'name email');
+    if (!patient) return res.status(404).json({ success: false, message: 'Patient profile not found' });
+    res.json({ success: true, patient });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Error fetching patient profile', error });
+  }
+};
 
 // Fetch questionnaires assigned to the patient
 exports.getMyQuestionnaires = async (req, res) => {

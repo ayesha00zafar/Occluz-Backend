@@ -5,8 +5,12 @@ const role = require('../middlewares/roleMiddleware');
 const {
   submitQuestionnaire,
   getMyQuestionnaires,
-  getTreatmentPlan
+  getTreatmentPlan,
+  getMyProfile
 } = require('../controllers/patientController');
+
+// Get patient profile
+router.get('/profile', auth, role('patient'), getMyProfile);
 
 // Get all questionnaires assigned to the patient
 router.get('/questionnaires', auth, role('patient'), getMyQuestionnaires);
